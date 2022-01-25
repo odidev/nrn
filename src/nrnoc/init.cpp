@@ -161,11 +161,11 @@ using bbcore_write_t = void (*)(double*, int*, int*, int*, double*, Datum*, Datu
 bbcore_write_t* nrn_bbcore_write_;
 bbcore_write_t* nrn_bbcore_read_;
 
-extern "C" void hoc_reg_bbcore_write(int type, bbcore_write_t f) {
+void hoc_reg_bbcore_write(int type, bbcore_write_t f) {
 	nrn_bbcore_write_[type] = f;
 }
 
-extern "C" void hoc_reg_bbcore_read(int type, bbcore_write_t f) {
+void hoc_reg_bbcore_read(int type, bbcore_write_t f) {
 	nrn_bbcore_read_[type] = f;
 }
 
@@ -914,7 +914,7 @@ printf("before-after processing type %d for %s not implemented\n", type, memb_fu
 	bamech_[type] = bam;
 }
 
-extern "C" void _cvode_abstol(Symbol** s, double* tol, int i)
+void _cvode_abstol(Symbol** s, double* tol, int i)
 {
 #if CVODE
 	if (s && s[i]->extra) {
@@ -1002,7 +1002,7 @@ p = prop_alloc(&(pnode[0]->prop), type, pnode[0]); /* this and any ions */
 #endif
 }
 
-extern "C" void _nrn_thread_reg(int i, int cons, void(*f)(Datum*)) {
+void _nrn_thread_reg(int i, int cons, void(*f)(Datum*)) {
 	if (cons == 1) {
 		memb_func[i].thread_mem_init_ = f;
 	}else if (cons == 0) {
@@ -1012,11 +1012,11 @@ extern "C" void _nrn_thread_reg(int i, int cons, void(*f)(Datum*)) {
 	}
 }
 
-extern "C" void _nrn_thread_table_reg(int i, void (*f)(double*, Datum*, Datum*, NrnThread*, int)) {
-    memb_func[i].thread_table_check_ = f;
+void _nrn_thread_table_reg(int i, void (*f)(double*, Datum*, Datum*, NrnThread*, int)) {
+	memb_func[i].thread_table_check_ = f;
 }
 
-extern "C" void _nrn_setdata_reg(int i, void(*call)(Prop*)) {
+void _nrn_setdata_reg(int i, void(*call)(Prop*)) {
 	memb_func[i].setdata_ = call;
 }
 /* there is some question about the _extcall_thread variables, if any. */
