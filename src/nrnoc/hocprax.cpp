@@ -54,7 +54,7 @@ extern int praxis_stop(int);
 }
 #endif
 
-extern int stoprun;
+extern "C" int stoprun;
 extern double chkarg(int, double, double);
 extern IvocVect* vector_new2(IvocVect* vec);
 extern void vector_delete(IvocVect* vec);

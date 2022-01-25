@@ -323,7 +323,7 @@ extern int _method3;
 
 #include <multicore.h>
 
-extern int stoprun;
+extern "C" int stoprun;
 #define tstopbit (1 << 15)
 #define tstopset stoprun |= tstopbit
 #define tstopunset stoprun &= (~tstopbit)

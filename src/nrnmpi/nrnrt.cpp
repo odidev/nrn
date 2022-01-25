@@ -14,7 +14,7 @@
 extern void nrn_fixed_step();
 extern void nrn_fake_step();
 extern double t, dt;
-extern int stoprun;
+extern "C" int stoprun;
 
 int nrn_realtime_;
 int nrnrt_overrun_;

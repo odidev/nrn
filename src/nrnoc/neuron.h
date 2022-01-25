@@ -33,7 +33,7 @@ extern void delete_section();
 extern int secondorder, diam_changed, nrn_shape_changed_, nrn_netrec_state_adjust, nrn_sparse_partrans;
 extern double clamp_resist;
 extern double celsius;
-extern int stoprun;
+extern "C" int stoprun;
 extern void fit_praxis(), attr_praxis(), pval_praxis(), stop_praxis();
 #if KEEP_NSEG_PARM
 extern void keep_nseg_parm();

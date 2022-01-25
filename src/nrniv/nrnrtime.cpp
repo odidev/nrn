@@ -7,7 +7,7 @@
 #include "nrnoc2iv.h"
 #include "parse.hpp"
 
-extern int stoprun;
+extern "C" int stoprun;
 extern double t;
 extern void nrn_fixed_step();
 
