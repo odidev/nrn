@@ -304,6 +304,9 @@ extern int _nrnunit_use_legacy_; /* 1:legacy, 0:modern (default) */
 extern void bbs_done(void);
 extern int hoc_main1(int, const char**, const char**);
 extern char* cxx_char_alloc(size_t size);
+
+// olupton 2022-01-31: This has to have C linkage for now because it is used in
+//                     praxis.c.
 extern "C" int stoprun;
 extern int nrn_mpiabort_on_error_;
 
