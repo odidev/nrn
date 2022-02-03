@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; NEURON  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Developer Builds" href="../install/developer.html" />
+    <link rel="prev" title="CMake Build Options" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> NEURON
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Building:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install/install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CMake Build Options</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#general-options">General options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cmake-install-prefix-path-path-where-nrn-should-be-installed">CMAKE_INSTALL_PREFIX:PATH=&lt;path-where-nrn-should-be-installed&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmake-build-type-string-relwithdebinfo">CMAKE_BUILD_TYPE:STRING=RelWithDebInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ninja">Ninja</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#interviews-options">InterViews options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-enable-interviews-bool-on">NRN_ENABLE_INTERVIEWS:BOOL=ON</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iv-dir-path-path-to-external-installation-of-interviews">IV_DIR:PATH=&lt;path-to-external-installation-of-interviews&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iv-enable-shared-bool-off">IV_ENABLE_SHARED:BOOL=OFF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iv-enable-x11-dynamic-bool-off">IV_ENABLE_X11_DYNAMIC:BOOL=OFF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iv-enable-x11-dynamic-make-headers-bool-off">IV_ENABLE_X11_DYNAMIC_MAKE_HEADERS:BOOL=OFF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mpi-options">MPI options:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-enable-mpi-bool-on">NRN_ENABLE_MPI:BOOL=ON</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-enable-mpi-dynamic-bool-off">NRN_ENABLE_MPI_DYNAMIC:BOOL=OFF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-mpi-dynamic-string">NRN_MPI_DYNAMIC:STRING=</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#python-options">Python options:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-enable-python-bool-on">NRN_ENABLE_PYTHON:BOOL=ON</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-enable-python-dynamic-bool-off">NRN_ENABLE_PYTHON_DYNAMIC:BOOL=OFF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-python-dynamic-string">NRN_PYTHON_DYNAMIC:STRING=</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-executable-path">PYTHON_EXECUTABLE:PATH=</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-enable-module-install-bool-on">NRN_ENABLE_MODULE_INSTALL:BOOL=ON</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-module-install-options-string-home-usr-local">NRN_MODULE_INSTALL_OPTIONS:STRING=–home=/usr/local</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-enable-rx3d-bool-on">NRN_ENABLE_RX3D:BOOL=ON</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-rx3d-opt-level-string-0">NRN_RX3D_OPT_LEVEL:STRING=0</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#coreneuron-options">CoreNEURON options:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-enable-coreneuron-bool-off">NRN_ENABLE_CORENEURON:BOOL=OFF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-enable-mod-compatibility-bool-off">NRN_ENABLE_MOD_COMPATIBILITY:BOOL=OFF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-coreneuron-options">Other CoreNEURON options:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#occasionally-useful-advanced-options">Occasionally useful advanced options:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cmake-c-compiler-filepath-usr-bin-cc">CMAKE_C_COMPILER:FILEPATH=/usr/bin/cc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmake-cxx-compiler-filepath-usr-bin-c">CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-nmodl-cxx-flags-string">NRN_NMODL_CXX_FLAGS:STRING=””</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#readline-root-dir-path-usr">Readline_ROOT_DIR:PATH=/usr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-enable-tests-bool-off">NRN_ENABLE_TESTS:BOOL=OFF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-enable-coverage-bool-off">NRN_ENABLE_COVERAGE:BOOL=OFF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-coverage-files-string">NRN_COVERAGE_FILES:STRING=</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-cmake-format-bool-off">NRN_CMAKE_FORMAT:BOOL=OFF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-clang-format-bool-off">NRN_CLANG_FORMAT:BOOL=OFF</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#miscellaneous-rarely-used-options-specific-to-neuron">Miscellaneous Rarely used options specific to NEURON:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-enable-discrete-event-observer-bool-on">NRN_ENABLE_DISCRETE_EVENT_OBSERVER:BOOL=ON</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-dynamic-units-use-legacy-bool-off">NRN_DYNAMIC_UNITS_USE_LEGACY:BOOL=OFF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-enable-mech-dll-style-bool-on">NRN_ENABLE_MECH_DLL_STYLE:BOOL=ON</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-enable-shared-bool-on">NRN_ENABLE_SHARED:BOOL=ON</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-enable-threads-bool-on">NRN_ENABLE_THREADS:BOOL=ON</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-use-rel-rpath-off">NRN_USE_REL_RPATH=OFF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nrn-enable-backtrace-bool-off">NRN_ENABLE_BACKTRACE:BOOL=OFF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install/developer.html">Developer Builds</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">NEURON Python documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hoc/index.html">NEURON HOC documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Python tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rxd-tutorials/index.html">Python RXD tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coreneuron/index.html">CoreNEURON</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../scm/index.html">NEURON SCM and Release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/index.html">NEURON Development topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doxygen.html">C/C++ API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Removed Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../removed_features.html">Removed Features</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Changelog</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">NEURON 8.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html#contributors">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html#feedback-help">Feedback / Help</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NEURON</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">CMake Build Options</a> &raquo;</li>
+      <li>Introduction</li>
+<li class="wy-breadcrumbs-aside">
+    
+    
+</li>
+
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/cmake_doc/options.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h1>
+<p>The NEURON build system now uses cmake as of version 7.8 circa Nov 2019.
+The previous autotools (./configure) build system has been removed after
+8.0 release.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/neuronsimulator/nrn nrn
+<span class="nb">cd</span> nrn
+mkdir build
+<span class="nb">cd</span> build
+cmake .. <span class="c1"># default install to /usr/local</span>
+make -j
+sudo make -j install
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">-j</span></code> option to make invokes a parallel make using all available cores.
+This is often very much faster than a single process make. One can add a number
+after the <code class="docutils literal notranslate"><span class="pre">-j</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">-j</span> <span class="pre">6</span></code>) to specify the maximum number of processes
+to use. This can be useful if there is the possibility of running out of memory.</p>
+<p>You can list CMake options with
+<code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">..</span> <span class="pre">-LH</span></code>
+which runs <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">..</span></code> as above and lists the cache variables along with help
+strings which are not marked as INTERNAL or ADVANCED. Alternatively,</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ccmake ..
+</pre></div>
+</div>
+<p>allows one to interactively inspect cached variables.
+In the build folder, <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">-LH</span></code> (missing &lt;path-to-source&gt;) will not
+run cmake, but if there is a <code class="docutils literal notranslate"><span class="pre">CMakeCache.txt</span></code> file, the cache variables
+will be listed.</p>
+<p>The above default <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">..</span></code> specifies a default installation location
+and build type, and includes (or leaves out) the following major
+functional components.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake .. -DCMAKE_INSTALL_PREFIX<span class="o">=</span>/usr/local <span class="se">\</span>
+  -DCMAKE_BUILD_TYPE<span class="o">=</span>RelWithDebInfo <span class="se">\</span>
+  -DNRN_ENABLE_INTERVIEWS<span class="o">=</span>ON <span class="se">\</span>
+  -DNRN_ENABLE_MPI<span class="o">=</span>ON <span class="se">\</span>
+  -DNRN_ENABLE_PYTHON<span class="o">=</span>ON <span class="se">\</span>
+  -DNRN_ENABLE_CORENEURON<span class="o">=</span>OFF
+</pre></div>
+</div>
+<p>Cmake option values persist with subsequent invocations of cmake unless
+explicitly changed by specifying arguments to cmake (or by modifying them
+with ccmake). It is intended that all build dependencies are taken into
+account so that it is not necessary to start fresh with an empty build
+folder when modifying cmake arguments. However, there may be unknown
+exceptions to this (bugs) so in case of problems it is generally sufficient
+to delete all contents of the build folder and start again with the desired
+cmake arguments.</p>
+</div>
+<div class="section" id="general-options">
+<h1>General options<a class="headerlink" href="#general-options" title="Permalink to this headline"></a></h1>
+<p>First arg is always <code class="docutils literal notranslate"><span class="pre">&lt;path-to-source&gt;</span></code> which is the path (absolute or relative)
+to the top level nrn folder (e.g. cloned from github). It is very common
+to create a folder named <code class="docutils literal notranslate"><span class="pre">build</span></code> in the top level nrn folder and run cmake
+in that. e.g.</p>
+<blockquote>
+<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> nrn
+mkdir build
+<span class="nb">cd</span> build
+cmake .. &lt;more args&gt;
+</pre></div>
+</div>
+</div></blockquote>
+<div class="section" id="cmake-install-prefix-path-path-where-nrn-should-be-installed">
+<h2>CMAKE_INSTALL_PREFIX:PATH=&lt;path-where-nrn-should-be-installed&gt;<a class="headerlink" href="#cmake-install-prefix-path-path-where-nrn-should-be-installed" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Install path prefix, prepended onto install directories.
+This can be a full path or relative. Default is /usr/local .
+A common install folder is ‘install’ in the build folder. e.g.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>install
+</pre></div>
+</div>
+<p>so that the installation folder is <code class="docutils literal notranslate"><span class="pre">.../nrn/build/install</span></code> .
+In this case the user should prepend <code class="docutils literal notranslate"><span class="pre">.../nrn/build/install/bin</span></code> to PATH
+and it may be useful to</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PYTHONPATH</span><span class="o">=</span>.../nrn/build/install/lib/python
+</pre></div>
+</div>
+<p>where in each case <code class="docutils literal notranslate"><span class="pre">...</span></code> is the full path prefix to nrn.</p>
+</div></blockquote>
+</div>
+<div class="section" id="cmake-build-type-string-relwithdebinfo">
+<h2>CMAKE_BUILD_TYPE:STRING=RelWithDebInfo<a class="headerlink" href="#cmake-build-type-string-relwithdebinfo" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Empty or one of Custom;Debug;Release;RelWithDebInfo;Fast.</p>
+<ul class="simple">
+<li>RelWithDebInfo means to compile using -O2 -g options.</li>
+<li>Debug means to compile with just -g (and optimization level -O0)
+This is very useful for debugging with gdb as, otherwise, local
+variables may be optimized away that are useful to inspect.</li>
+<li>Release means to compile with -O2 -DNDEBUG.
+The latter eliminates assert statements.</li>
+<li>Custom requires that you specify flags with CMAKE_C_FLAGS and CMAKE_CXX_FLAGS</li>
+<li>Fast requires that you specify flags as indicated in nrn/cmake/ReleaseDebugAutoFlags.cmake</li>
+</ul>
+<p>Custom and Fast depend on specific compilers and (super)computers and are tailored to those
+machines. See <code class="docutils literal notranslate"><span class="pre">nrn/cmake/ReleaseDebugAutoFlags.cmake</span></code></p>
+</div></blockquote>
+</div>
+<div class="section" id="ninja">
+<h2>Ninja<a class="headerlink" href="#ninja" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Use the Ninja build system (‘make’ is the default ‘CMake’ build system).</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cmake .. -G Ninja ...
+ninja install
+</pre></div>
+</div>
+<p>Ninja can be faster than make during development when compiling
+just a few files. Some rough timings on a mac powerbook arm64 with and
+without -G Ninja for <code class="docutils literal notranslate"><span class="pre">cmake</span> <span class="pre">..</span> <span class="pre">-G</span> <span class="pre">Ninja</span> <span class="pre">-DCMAKE_INSTALL_PREFIX=install</span></code>
+are:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note: make executed in build-make folder, ninja executed in build-ninja folder.</span>
+<span class="nb">time</span> make -j install<span class="o">)</span> <span class="c1"># 39s</span>
+<span class="nb">time</span> ninja install    <span class="c1"># 35s</span>
+touch ../src/nrnoc/section.h
+<span class="nb">time</span> make -j          <span class="c1"># 8.3s</span>
+<span class="nb">time</span> ninja            <span class="c1"># 7.4s</span>
+</pre></div>
+</div>
+<p>On mac, install ninja with <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">ninja</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">ninja</span> <span class="pre">help</span></code> prints the target names that can be built individually</p>
+<p><code class="docutils literal notranslate"><span class="pre">ninja</span> <span class="pre">-j</span> <span class="pre">1</span></code> does a non-parallel build.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ninja</span> <span class="pre">-v</span></code> shows each command.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="interviews-options">
+<h1>InterViews options<a class="headerlink" href="#interviews-options" title="Permalink to this headline"></a></h1>
+<div class="section" id="nrn-enable-interviews-bool-on">
+<h2>NRN_ENABLE_INTERVIEWS:BOOL=ON<a class="headerlink" href="#nrn-enable-interviews-bool-on" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Enable GUI with INTERVIEWS</p>
+<p>Unless you specify IV_DIR, InterViews will be automatically cloned as
+a subproject, built, and installed in CMAKE_INSTALL_PREFIX.</p>
+</div></blockquote>
+</div>
+<div class="section" id="iv-dir-path-path-to-external-installation-of-interviews">
+<h2>IV_DIR:PATH=&lt;path-to-external-installation-of-interviews&gt;<a class="headerlink" href="#iv-dir-path-path-to-external-installation-of-interviews" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>The directory containing a CMake configuration file for iv.</p>
+<p>IV_DIR is the install location of iv and the directory actually containing
+the cmake configuration files is <code class="docutils literal notranslate"><span class="pre">IV_DIR/lib/cmake</span></code>.
+This is useful when you have many clones of nrn for different development
+purposes and wish to use a single independent InterViews installation
+for many/all of them. E.g. I generally invoke</p>
+</div></blockquote>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>-DIV_DIR<span class="o">=</span><span class="nv">$HOME</span>/neuron/ivcmake/build/install
+</pre></div>
+</div>
+</div>
+<div class="section" id="iv-enable-shared-bool-off">
+<h2>IV_ENABLE_SHARED:BOOL=OFF<a class="headerlink" href="#iv-enable-shared-bool-off" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Build libraries shared or static</p>
+<p>I generally build InterViews static. The nrn build will then incorporate
+all of InterViews into libnrniv.so</p>
+</div></blockquote>
+</div>
+<div class="section" id="iv-enable-x11-dynamic-bool-off">
+<h2>IV_ENABLE_X11_DYNAMIC:BOOL=OFF<a class="headerlink" href="#iv-enable-x11-dynamic-bool-off" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>dlopen X11 after launch</p>
+<p>This is most useful for building Mac distributions where XQuartz (X11) may
+not be installed on the user’s machine and the user does not require
+InterViews graphics. If XQuartz is subsequently installed, InterViews graphics
+will suddenly be available.</p>
+</div></blockquote>
+</div>
+<div class="section" id="iv-enable-x11-dynamic-make-headers-bool-off">
+<h2>IV_ENABLE_X11_DYNAMIC_MAKE_HEADERS:BOOL=OFF<a class="headerlink" href="#iv-enable-x11-dynamic-make-headers-bool-off" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Remake the X11 dynamic .h files.</p>
+<p>Don’t use this. The scripts are very brittle and X11 is very stable.
+If it is ever necessary to remake the X11 dynamic .h files, I will
+do so and push them to the <a class="reference external" href="https://github.com/neuronsimulator/iv">https://github.com/neuronsimulator/iv</a> respository.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="mpi-options">
+<h1>MPI options:<a class="headerlink" href="#mpi-options" title="Permalink to this headline"></a></h1>
+<div class="section" id="nrn-enable-mpi-bool-on">
+<h2>NRN_ENABLE_MPI:BOOL=ON<a class="headerlink" href="#nrn-enable-mpi-bool-on" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Enable MPI support</p>
+<p>Requires an MPI installation, e.g. openmpi or mpich. Note that the Python mpi4py module generally uses
+openmpi which cannot be mixed with mpich.</p>
+</div></blockquote>
+</div>
+<div class="section" id="nrn-enable-mpi-dynamic-bool-off">
+<h2>NRN_ENABLE_MPI_DYNAMIC:BOOL=OFF<a class="headerlink" href="#nrn-enable-mpi-dynamic-bool-off" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Enable dynamic MPI library support</p>
+<p>This is mostly useful for binary distibutions where MPI may or may not
+exist on the target machine.</p>
+</div></blockquote>
+</div>
+<div class="section" id="nrn-mpi-dynamic-string">
+<h2>NRN_MPI_DYNAMIC:STRING=<a class="headerlink" href="#nrn-mpi-dynamic-string" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>semicolon (;) separated list of MPI include directories to build against. Default to first found mpi)</p>
+<p>Cmake knows about openmpi, mpich, mpt, and msmpi. The dynamic loader for linux tries to load libmpi.so and if that fails, libmpich.so (the latter is good for cray mpi). The system then checks to see if a specific symbol exists in the libmpi… and determines whether to  load the libnrnmp_xxx.so for openmpi, mpich, or mpt. To make binary installers good for openmpi and mpich, I use</p>
+</div></blockquote>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>-DNRN_MPI_DYNAMIC<span class="o">=</span><span class="s2">&quot;/usr/local/include/;/home/hines/soft/mpich/include&quot;</span>
+
+This option is ignored unless <span class="nv">NRN_ENABLE_MPI_DYNAMIC</span><span class="o">=</span>ON
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="python-options">
+<h1>Python options:<a class="headerlink" href="#python-options" title="Permalink to this headline"></a></h1>
+<div class="section" id="nrn-enable-python-bool-on">
+<h2>NRN_ENABLE_PYTHON:BOOL=ON<a class="headerlink" href="#nrn-enable-python-bool-on" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div>Enable Python interpreter support
+(default python, fallback to python3, but see PYTHON_EXECUTABLE below)</div></blockquote>
+</div>
+<div class="section" id="nrn-enable-python-dynamic-bool-off">
+<h2>NRN_ENABLE_PYTHON_DYNAMIC:BOOL=OFF<a class="headerlink" href="#nrn-enable-python-dynamic-bool-off" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Enable dynamic Python version support</p>
+<p>This is mostly useful for binary distributions where it is unknown which
+version, if any, of python exists on the target machine.</p>
+</div></blockquote>
+</div>
+<div class="section" id="nrn-python-dynamic-string">
+<h2>NRN_PYTHON_DYNAMIC:STRING=<a class="headerlink" href="#nrn-python-dynamic-string" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>semicolon (;) separated list of python executables to create interfaces. (default python3)</p>
+<p>If the string is empty use the python specified by PYTHON_EXECUTABLE
+or else the default python. Binary distributions often specify a list
+of python versions so that if any one of them is available on the
+target machine, NEURON + Python will be fully functional. Eg. the
+mac package build script on my machine, nrn/bldnrnmacpkgcmake.sh uses</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>-DNRN_PYTHON_DYNAMIC<span class="o">=</span><span class="s2">&quot;python3.6;python3.7;python3.8;python3.9&quot;</span>
+</pre></div>
+</div>
+<p>This option is ignored unless NRN_ENABLE_PYTHON_DYNAMIC=ON</p>
+</div></blockquote>
+</div>
+<div class="section" id="python-executable-path">
+<h2>PYTHON_EXECUTABLE:PATH=<a class="headerlink" href="#python-executable-path" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Use provided python binary instead of the one found by CMake.
+This must be a full path. We generally use</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>-DPYTHON_EXECUTABLE<span class="o">=</span><span class="sb">`</span>which python3.7<span class="sb">`</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="nrn-enable-module-install-bool-on">
+<h2>NRN_ENABLE_MODULE_INSTALL:BOOL=ON<a class="headerlink" href="#nrn-enable-module-install-bool-on" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Enable installation of NEURON Python module.</p>
+<p>By default, the neuron module is installed in CMAKE_INSTALL_PREFIX/lib/python.</p>
+</div></blockquote>
+</div>
+<div class="section" id="nrn-module-install-options-string-home-usr-local">
+<h2>NRN_MODULE_INSTALL_OPTIONS:STRING=–home=/usr/local<a class="headerlink" href="#nrn-module-install-options-string-home-usr-local" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>setup.py options, everything after setup.py install</p>
+<p>To install in site-packages use an empty string</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>-DNRN_MODULE_INSTALL_OPTIONS<span class="o">=</span><span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+<p>This option is (or should be) ignored unless NRN_ENABLE_MODULE_INSTALL=ON.</p>
+</div></blockquote>
+</div>
+<div class="section" id="nrn-enable-rx3d-bool-on">
+<h2>NRN_ENABLE_RX3D:BOOL=ON<a class="headerlink" href="#nrn-enable-rx3d-bool-on" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Enable rx3d support</p>
+<p>No longer any reason to turn this off as build time is not significantly
+increased due to compiling cython generated files with -O0 by default.</p>
+</div></blockquote>
+</div>
+<div class="section" id="nrn-rx3d-opt-level-string-0">
+<h2>NRN_RX3D_OPT_LEVEL:STRING=0<a class="headerlink" href="#nrn-rx3d-opt-level-string-0" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Optimization level for Cython generated files (non-zero may compile slowly)</p>
+<p>It is not clear to me if -O0 has significantly less performance than -O2.
+Binary distributions are (or should be) built with</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>-DNRN_RX3D_OPT_LEVEL<span class="o">=</span><span class="m">2</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="coreneuron-options">
+<h1>CoreNEURON options:<a class="headerlink" href="#coreneuron-options" title="Permalink to this headline"></a></h1>
+<div class="section" id="nrn-enable-coreneuron-bool-off">
+<h2>NRN_ENABLE_CORENEURON:BOOL=OFF<a class="headerlink" href="#nrn-enable-coreneuron-bool-off" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Enable CoreNEURON support</p>
+<p>If ON and no argument pointing to an external installation, CoreNEURON
+will be cloned as a submodule along with all its NMODL submodule dependencies.</p>
+</div></blockquote>
+</div>
+<div class="section" id="nrn-enable-mod-compatibility-bool-off">
+<h2>NRN_ENABLE_MOD_COMPATIBILITY:BOOL=OFF<a class="headerlink" href="#nrn-enable-mod-compatibility-bool-off" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Enable CoreNEURON compatibility for MOD files</p>
+<p>CoreNEURON does not allow the common NEURON THREADSAFE promotion of
+GLOBAL variables that appear on the right hand side of assignment statements
+to become thread specific variables. This option is
+automatically turned on if NRN_ENABLE_CORENEURON=ON.</p>
+</div></blockquote>
+</div>
+<div class="section" id="other-coreneuron-options">
+<h2>Other CoreNEURON options:<a class="headerlink" href="#other-coreneuron-options" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>There are 20 or so cmake arguments specific to a CoreNEURON
+build that are listed in <a class="reference external" href="https://github.com/BlueBrain/CoreNeuron/blob/master/CMakeLists.txt">https://github.com/BlueBrain/CoreNeuron/blob/master/CMakeLists.txt</a>.
+The ones of particular interest that can be used on the NEURON
+CMake configure line are <cite>CORENRN_ENABLE_NMODL</cite> and <cite>CORENRN_ENABLE_GPU</cite>.
+For developers preparing a pull request that involves associated changes
+to CoreNEURON sources, a CoreNEURON pull request will fail if the
+changes are not formatted properly. In this case, note that
+<cite>CORENRN_CLANG_FORMAT</cite> can only be used in a CoreNEURON specific CMake
+configure line in external/coreneuron/build.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd external/coreneuron
+mkdir build
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=install -DPYTHON_EXECUTABLE=`which python` -DCORENRN_CLANG_FORMAT=ON
+make clang-format
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="occasionally-useful-advanced-options">
+<h1>Occasionally useful advanced options:<a class="headerlink" href="#occasionally-useful-advanced-options" title="Permalink to this headline"></a></h1>
+<blockquote>
+<div>See all the options with <code class="docutils literal notranslate"><span class="pre">ccmake</span> <span class="pre">..</span></code> in the build folder. They are
+also in the CMakeCache.txt file. Following is a definitely incomplete list.</div></blockquote>
+<div class="section" id="cmake-c-compiler-filepath-usr-bin-cc">
+<h2>CMAKE_C_COMPILER:FILEPATH=/usr/bin/cc<a class="headerlink" href="#cmake-c-compiler-filepath-usr-bin-cc" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>C compiler</p>
+<p>On the mac, prior to knowing about
+<code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">SDK_ROOT=$(xcrun</span> <span class="pre">-sdk</span> <span class="pre">macosx</span> <span class="pre">--show-sdk-path)</span></code>
+I got into the habit of</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">DCMAKE_C_COMPILER</span><span class="o">=</span><span class="n">clang</span> <span class="o">-</span><span class="n">DCMAKE_CXX_COMPILER</span><span class="o">=</span><span class="n">clang</span><span class="o">++</span>
+</pre></div>
+</div>
+<p>to avoid the problem of gcc not being able to find stdio.h when
+python was compiling inithoc.cpp</p>
+</div></blockquote>
+</div>
+<div class="section" id="cmake-cxx-compiler-filepath-usr-bin-c">
+<h2>CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++<a class="headerlink" href="#cmake-cxx-compiler-filepath-usr-bin-c" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div>C plus plus compiler</div></blockquote>
+</div>
+<div class="section" id="nrn-nmodl-cxx-flags-string">
+<h2>NRN_NMODL_CXX_FLAGS:STRING=””<a class="headerlink" href="#nrn-nmodl-cxx-flags-string" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Compiler flag to build tools like nocmodl, modlunit.</p>
+<p>In cluster environment with different architecture of login node
+and compute node, we need to compile tools like nocmodl and modlunit
+with different compiler options to run them on login/build nodes. This
+option appends provided flags to CMAKE_CXX_FLAGS.</p>
+<p>For example, with intel compiler compiling NEURON for KNL but building
+on a Skylake node:
+.. code-block:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">DCMAKE_BUILD_TYPE</span><span class="o">=</span><span class="n">Custom</span> <span class="o">-</span><span class="n">DCMAKE_CXX_FLAGS</span><span class="o">=</span><span class="s2">&quot;-xMIC-AVX512&quot;</span> <span class="o">-</span><span class="n">DNRN_NMODL_CXX_FLAGS</span><span class="o">=</span><span class="s2">&quot;-XHost&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="readline-root-dir-path-usr">
+<h2>Readline_ROOT_DIR:PATH=/usr<a class="headerlink" href="#readline-root-dir-path-usr" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Install directory prefix where readline is installed.</p>
+<p>If cmake can’t find readline, you can give this hint with the directory
+path under which readline is installed. Note that on some platforms
+with multi-arch support (e.g. Debian/Ubuntu), CMake versions &lt; 3.20 are not
+able to find readline library when NVHPC/PGI compiler is used (for GPU
+support). In this case you can install newer CMake (&gt;= 3.20) or explicitly
+specify readline library using <cite>-DReadline_LIBRARY=</cite> option:
+.. code-block:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">DReadline_LIBRARY</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libreadline</span><span class="o">.</span><span class="n">so</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="nrn-enable-tests-bool-off">
+<h2>NRN_ENABLE_TESTS:BOOL=OFF<a class="headerlink" href="#nrn-enable-tests-bool-off" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Enable unit tests</p>
+<p>Clones the submodule catch2 from <a class="reference external" href="https://github.com/catchorg/Catch2.git">https://github.com/catchorg/Catch2.git</a> and after a build using
+<code class="docutils literal notranslate"><span class="pre">make</span></code> can run the tests with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code>.
+May also need to <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pytest</span></code>.
+<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> is quite terse. To get the same verbose output that is
+seen with the CI tests, use <code class="docutils literal notranslate"><span class="pre">ctest</span> <span class="pre">-VV</span></code> (executed in the
+build folder) or an individual test with <code class="docutils literal notranslate"><span class="pre">ctest</span> <span class="pre">-VV</span> <span class="pre">-R</span> <span class="pre">name_of_the_test</span></code>.
+One can also run individual test files
+with <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">pytest</span> <span class="pre">&lt;testfile.py&gt;</span></code> or all the test files in that
+folder with <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">pytest</span></code>. Note: It is helpful to <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code>
+first to ensure any mod files needed are available to the tests. If
+running a test outside the folder where the test is located, it may be
+necessary to add the folder to PYTHONPATH. Note: The last python
+mentioned in the <code class="docutils literal notranslate"><span class="pre">-DNRN_PYTHON_DYNAMIC=...</span></code> (if the semicolon separated
+list is non-empty and <code class="docutils literal notranslate"><span class="pre">-DNRN_ENABLE_PYTHON_DYNAMIC=ON</span></code>)
+is the one used for <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> and <code class="docutils literal notranslate"><span class="pre">ctest</span> <span class="pre">-VV</span></code>. Otherwise the
+value specified by <code class="docutils literal notranslate"><span class="pre">PYTHON_EXECUTABLE</span></code> is used.</p>
+<p>Example</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir build
+cmake .. -DNRN_ENABLE_TESTS<span class="o">=</span>ON ...
+make -j
+make <span class="nb">test</span>
+ctest -VV -R parallel_tests
+<span class="nb">cd</span> ../test/pynrn
+python3 -m pytest
+python3 -m pytest test_currents.py
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="nrn-enable-coverage-bool-off">
+<h2>NRN_ENABLE_COVERAGE:BOOL=OFF<a class="headerlink" href="#nrn-enable-coverage-bool-off" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Enable code coverage</p>
+<p>Requires <code class="docutils literal notranslate"><span class="pre">lcov</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">lcov</span></code>).</p>
+<p>Provides two make targets to simplify the repeated “run tests, examine coverage”
+workflow.</p>
+<blockquote>
+<div><p>– <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">cover_begin</span></code> erases all previous coverage data
+(<code class="docutils literal notranslate"><span class="pre">*.gcda</span></code> files), and creates a baseline report. (Note all files and
+folders are created in the <code class="docutils literal notranslate"><span class="pre">CMAKE_BINARY_DIR</span></code> where you ran cmake.)</p>
+<p class="attribution">&mdash;<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">cover_html</span></code> creates a coverage report for the sum of all the
+software runs since the last <code class="docutils literal notranslate"><span class="pre">cover_begin</span></code> and prints a file url
+that you can paste into your browser to review the coverage.</p>
+</div></blockquote>
+<p>When using an iterative workflow to examine test coverage of a single
+or a few files, the above targets run much faster when this option is
+combined with <a class="reference internal" href="#nrn-coverage-files-string">NRN_COVERAGE_FILES:STRING=</a></p>
+<p>Code coverage without the use of this option is explained in
+<a class="reference external" href="../install/code_coverage.html">Developer Builds: Code Coverage</a></p>
+</div></blockquote>
+</div>
+<div class="section" id="nrn-coverage-files-string">
+<h2>NRN_COVERAGE_FILES:STRING=<a class="headerlink" href="#nrn-coverage-files-string" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Coverage limited to semicolon (;) separated list of file paths
+relative to <code class="docutils literal notranslate"><span class="pre">PROJECT_SOURCE_DIR</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-DNRN_COVERAGE_FILES=&quot;src/nrniv/partrans.cpp;src/nmodl/parsact.cpp;src/nrnpython/nrnpy_hoc.cpp&quot;</span></code></p>
+</div></blockquote>
+</div>
+<div class="section" id="nrn-cmake-format-bool-off">
+<h2>NRN_CMAKE_FORMAT:BOOL=OFF<a class="headerlink" href="#nrn-cmake-format-bool-off" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Enable CMake code formatting</p>
+<p>Clones the submodule coding-conventions from <a class="reference external" href="https://github.com/BlueBrain/hpc-coding-conventions.git">https://github.com/BlueBrain/hpc-coding-conventions.git</a>.
+Also need to <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">cmake-format=0.6.0</span> <span class="pre">--user</span></code>.
+After a build using <code class="docutils literal notranslate"><span class="pre">make</span></code> can reformat cmake files with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">cmake-format</span></code>
+See nrn/CONTRIBUTING.md for further details.
+How does one reformat a specific cmake file?</p>
+</div></blockquote>
+</div>
+<div class="section" id="nrn-clang-format-bool-off">
+<h2>NRN_CLANG_FORMAT:BOOL=OFF<a class="headerlink" href="#nrn-clang-format-bool-off" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Enable code formatting</p>
+<p>Clones the submodule coding-conventions from <a class="reference external" href="https://github.com/BlueBrain/hpc-coding-conventions.git">https://github.com/BlueBrain/hpc-coding-conventions.git</a>.
+For mac, need: <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">clang-format</span></code>
+After a build using <code class="docutils literal notranslate"><span class="pre">make</span></code>, can reformat all sources with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clang_format</span></code>
+Incremental code formatting (of the current patch) can be done by setting additional build flags
+<code class="docutils literal notranslate"><span class="pre">NRN_FORMATTING_ON=&quot;since-ref:master&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">NRN_FORMATTING_CPP_CHANGES_ONLY=ON</span></code>.
+<a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a></p>
+<p>To manually format a single file, run in the top folder, e.g.:
+<code class="docutils literal notranslate"><span class="pre">clang-format</span> <span class="pre">--style=file</span> <span class="pre">-i</span> <span class="pre">src/nrniv/bbsavestate.cpp</span></code></p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="miscellaneous-rarely-used-options-specific-to-neuron">
+<h1>Miscellaneous Rarely used options specific to NEURON:<a class="headerlink" href="#miscellaneous-rarely-used-options-specific-to-neuron" title="Permalink to this headline"></a></h1>
+<div class="section" id="nrn-enable-discrete-event-observer-bool-on">
+<h2>NRN_ENABLE_DISCRETE_EVENT_OBSERVER:BOOL=ON<a class="headerlink" href="#nrn-enable-discrete-event-observer-bool-on" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div>Enable Observer to be a subclass of DiscreteEvent
+Can save space but a lot of component destruction may not notify other components that are watching it to no longer use that component. Useful only if one builds a model without needing to eliminate pieces of the model.</div></blockquote>
+</div>
+<div class="section" id="nrn-dynamic-units-use-legacy-bool-off">
+<h2>NRN_DYNAMIC_UNITS_USE_LEGACY:BOOL=OFF<a class="headerlink" href="#nrn-dynamic-units-use-legacy-bool-off" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Default is to use modern faraday, R, etc. from 2019 nist constants.
+When Off or ON, and in the absence of the <code class="docutils literal notranslate"><span class="pre">NRNUNIT_USE_LEGACY=0or1</span></code>
+environment variable, the default dynamic value of <code class="docutils literal notranslate"><span class="pre">h.nrnunit_use_legacy()</span></code>
+will be 0 or 1 respectively.</p>
+<p>At launch time (or import neuron),
+use of legacy or modern units can be specified with the
+<code class="docutils literal notranslate"><span class="pre">NRNUNIT_USE_LEGACY=0or1</span></code> environment variable. The use of legacy or
+modern units can be dynamically specified after launch with the
+<code class="docutils literal notranslate"><span class="pre">h.nrnunit_use_legacy(0or1)</span></code> function (with no args, returns the
+current use flag).</p>
+</div></blockquote>
+</div>
+<div class="section" id="nrn-enable-mech-dll-style-bool-on">
+<h2>NRN_ENABLE_MECH_DLL_STYLE:BOOL=ON<a class="headerlink" href="#nrn-enable-mech-dll-style-bool-on" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div>Dynamically load nrnmech shared library</div></blockquote>
+</div>
+<div class="section" id="nrn-enable-shared-bool-on">
+<h2>NRN_ENABLE_SHARED:BOOL=ON<a class="headerlink" href="#nrn-enable-shared-bool-on" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Build shared libraries (otherwise static library)</p>
+<p>This must be ON if python is launched and imports neuron. If OFF and one wants to use python it will be
+necessary to launch</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nrniv -python
+</pre></div>
+</div>
+<p>Note that the top-level <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file includes some custom configuration for Cray platforms.
+This may need to be adapted if you specify <code class="docutils literal notranslate"><span class="pre">NRN_ENABLE_SHARED=OFF</span></code>.</p>
+</div></blockquote>
+</div>
+<div class="section" id="nrn-enable-threads-bool-on">
+<h2>NRN_ENABLE_THREADS:BOOL=ON<a class="headerlink" href="#nrn-enable-threads-bool-on" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div>Allow use of Pthreads</div></blockquote>
+</div>
+<div class="section" id="nrn-use-rel-rpath-off">
+<h2>NRN_USE_REL_RPATH=OFF<a class="headerlink" href="#nrn-use-rel-rpath-off" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div>Turned on when creating python wheels.</div></blockquote>
+</div>
+<div class="section" id="nrn-enable-backtrace-bool-off">
+<h2>NRN_ENABLE_BACKTRACE:BOOL=OFF<a class="headerlink" href="#nrn-enable-backtrace-bool-off" title="Permalink to this headline"></a></h2>
+<blockquote>
+<div><p>Generate a backtrace on floating, segfault, and bus exceptions.</p>
+<p>Avoids the need to use gdb to view the backtrace.</p>
+<p>Does not work with python.</p>
+<p>Note: floating exceptions are turned on with <a class="reference internal" href="../python/programming/errors.html#nrn_feenableexcept" title="nrn_feenableexcept"><code class="xref py py-func docutils literal notranslate"><span class="pre">nrn_feenableexcept()</span></code></a>.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="CMake Build Options" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../install/developer.html" class="btn btn-neutral float-right" title="Developer Builds" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Duke, Yale and the Blue Brain Project.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+degradable_buffer
+----------------
+
+.. raw:: html
+   :file: degradable_buffer.html
+

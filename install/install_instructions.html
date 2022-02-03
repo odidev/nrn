@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installing Binary Distribution &mdash; NEURON  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CMake Build Options" href="../cmake_doc/index.html" />
+    <link rel="prev" title="Installation" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> NEURON
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Building:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="install.html">Installation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Installing Binary Distribution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mac-os">Mac OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linux">Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#windows-subsystem-for-linux-wsl-python-wheel">Windows Subsystem for Linux (WSL) Python Wheel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-source-distributions">Installing Source Distributions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-build-dependencies">Install Build Dependencies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Mac OS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#install-neuron-using-cmake">Install NEURON using CMake</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#optimized-cpu-and-gpu-support-using-coreneuron">Optimized CPU and GPU Support using CoreNEURON</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#run-integrated-tests">Run integrated tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#faqs">FAQs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake_doc/index.html">CMake Build Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer.html">Developer Builds</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">NEURON Python documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hoc/index.html">NEURON HOC documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Python tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rxd-tutorials/index.html">Python RXD tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coreneuron/index.html">CoreNEURON</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../scm/index.html">NEURON SCM and Release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/index.html">NEURON Development topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doxygen.html">C/C++ API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Removed Features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../removed_features.html">Removed Features</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Changelog</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">NEURON 8.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html#contributors">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html#feedback-help">Feedback / Help</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NEURON</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="install.html">Installation</a> &raquo;</li>
+      <li>Installing Binary Distribution</li>
+<li class="wy-breadcrumbs-aside">
+    
+    
+</li>
+
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/install/install_instructions.md.txt" rel="nofollow"> View page source</a>
+      </li>
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>NEURON can be installed on a wide variety of hardware platforms. Based on your system and software
+environment you can choose one of the installation method described below.</p>
+<div class="section" id="installing-binary-distribution">
+<h1>Installing Binary Distribution<a class="headerlink" href="#installing-binary-distribution" title="Permalink to this headline"></a></h1>
+<p>If you want to quickly get started with NEURON, we provide binary installers for Linux, Mac and
+Windows platforms.</p>
+<div class="section" id="mac-os">
+<h2>Mac OS<a class="headerlink" href="#mac-os" title="Permalink to this headline"></a></h2>
+<p>Since version 7.8.1 we are providing Python wheels and NEURON can be installed using <code class="docutils literal notranslate"><span class="pre">pip</span></code> as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">neuron</span>
+</pre></div>
+</div>
+<p>Python wheels are provided via <a class="reference external" href="https://pypi.org/project/NEURON/">pypi.org</a>. Note that Python2
+wheels are provided for the 8.0.x release series exclusively.</p>
+<p>Like Windows, you can also use a binary installer to install NEURON. You can download alpha or recent
+releases from below URLs:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://neuron.yale.edu/ftp/neuron/versions/alpha/">Alpha releases</a></li>
+<li><a class="reference external" href="https://neuron.yale.edu/ftp/neuron/versions/">Recent Releases</a></li>
+</ul>
+<p>Mac OS installers have name in the format of <code class="docutils literal notranslate"><span class="pre">nrn-&lt;version-id&gt;-osx-36-37-38-39.pkg</span></code>. Like windows
+installer, <code class="docutils literal notranslate"><span class="pre">py-36-37-38-39</span></code> string in the installer name indicates that the given installer is
+compatible with Python versions 3.6, 3.7, 3.8 and 3.9. Note that if you double-click the installer
+then you might see warning like below. In this case you have to right-click on the installer and then
+click <code class="docutils literal notranslate"><span class="pre">Open</span></code>. You can then see an option to <code class="docutils literal notranslate"><span class="pre">Open</span></code> installer:</p>
+<p><img alt="Installer Warning" src="../_images/osx_installer_warning_solution.png" /></p>
+<p>This will install NEURON under directory <code class="docutils literal notranslate"><span class="pre">/Applications/NEURON-&lt;version&gt;/</span></code> directory. For GUI support you
+have to install <a class="reference external" href="https://www.xquartz.org/">XQuartz</a> separately. Once you start Terminal application, NEURON
+binaries (<code class="docutils literal notranslate"><span class="pre">nrniv</span></code>, <code class="docutils literal notranslate"><span class="pre">neurondemo</span></code> etc.) should be available to start.</p>
+</div>
+<div class="section" id="linux">
+<h2>Linux<a class="headerlink" href="#linux" title="Permalink to this headline"></a></h2>
+<p>Like Mac OS, since 7.8.1 release python wheels are provided and you can use <code class="docutils literal notranslate"><span class="pre">pip</span></code> to install NEURON as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">neuron</span>
+</pre></div>
+</div>
+<p>Note that Python2 wheels are provided for the 8.0.x release series exclusively. Also, we are not providing .rpm or .deb
+installers for recent releases.</p>
+</div>
+<div class="section" id="windows">
+<h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline"></a></h2>
+<p>On Windows, the only recommended way to install NEURON is using the binary installer. You can download alpha
+or recent releases from:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://neuron.yale.edu/ftp/neuron/versions/alpha/">Alpha releases</a></li>
+<li><a class="reference external" href="https://neuron.yale.edu/ftp/neuron/versions/">Recent Releases</a></li>
+</ul>
+<p>The naming convention for Windows installers is <code class="docutils literal notranslate"><span class="pre">nrn-&lt;version-id&gt;-mingw-py-36-37-38-39-setup.exe</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">py-36-37-38-39</span></code> string in the installer name indicates that the given installer is compatible
+with Python versions 3.6, 3.7, 3.8 and 3.9. Once the installer is downloaded, you can install it
+by double clicking like any other Windows application. Note that you have to install python separately
+if python support is required. You can find detailed step-by-step instructions in
+<a class="reference external" href="https://neuron.yale.edu/ftp/neuron/nrn_mswin_install.pdf">this presentation</a>.</p>
+</div>
+<div class="section" id="windows-subsystem-for-linux-wsl-python-wheel">
+<h2>Windows Subsystem for Linux (WSL) Python Wheel<a class="headerlink" href="#windows-subsystem-for-linux-wsl-python-wheel" title="Permalink to this headline"></a></h2>
+<p>Alternatively, if you are using Windows Subsystem for Linux, you can install the available Linux Python wheel.
+Note that the default Linux distro installed by WSL is Ubuntu, and the following instructions are tailored accordingly.</p>
+<p>Steps:</p>
+<ol class="simple">
+<li>Follow official Microsoft WSL installation guide: https://docs.microsoft.com/en-us/windows/wsl/install</li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Notes:
+      * WSL requires virtualization capabilities, please ensure they are enabled on your system (i.e. BIOS).
+      * If you are using VirtualBox, WSL2 is not supported (https://forums.virtualbox.org/viewtopic.php?t=95302)
+        To enable WSL1 from command prompt or powershell: 
+          wsl --set-default-version 1
+          wsl --install -d Ubuntu
+</pre></div>
+</div>
+<ol class="simple">
+<li>Install <code class="docutils literal notranslate"><span class="pre">pip3</span></code></li>
+</ol>
+<p>Open <code class="docutils literal notranslate"><span class="pre">Ubuntu</span></code> from programs and run the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get update
+sudo apt install python3-pip python3-numpy
+</pre></div>
+</div>
+<ol class="simple">
+<li>Install NEURON</li>
+</ol>
+<p>In the same terminal run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install neuron
+</pre></div>
+</div>
+<p>Close and open another terminal. You can do some sanity testing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;import neuron; neuron.test(); quit()&quot;</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li>(Optional: NEURON GUI) Install <code class="docutils literal notranslate"><span class="pre">VcXsrv</span></code>, a Windows X-server</li>
+</ol>
+<ul class="simple">
+<li>Download and install <code class="docutils literal notranslate"><span class="pre">VcXsrv</span></code> from  <a class="reference external" href="https://sourceforge.net/projects/vcxsrv/">SourceForge</a>.</li>
+<li>Open <code class="docutils literal notranslate"><span class="pre">XLaunch</span></code> from the Start Menu. In the setup wizard accept the default options until <code class="docutils literal notranslate"><span class="pre">Extra</span> <span class="pre">settings</span></code> where you have to tick <code class="docutils literal notranslate"><span class="pre">Disable</span> <span class="pre">access</span> <span class="pre">control</span></code>. Additionally on the last page, click on the <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">configuration</span></code> button and save the configuration file in <code class="docutils literal notranslate"><span class="pre">%APPDATA%\Microsoft\Windows\Start</span> <span class="pre">Menu\Programs\Startup</span></code> in order to automatically launch <code class="docutils literal notranslate"><span class="pre">VcXsrv</span></code>at startup without re-doing the wizard. If prompted via Windows Defender Firewall, click on <code class="docutils literal notranslate"><span class="pre">Allow</span> <span class="pre">access</span></code>.</li>
+<li>In an Ubuntu terminal run:</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">DISPLAY</span><span class="o">=</span>:0
+</pre></div>
+</div>
+<p>and then you can just launch <code class="docutils literal notranslate"><span class="pre">nrngui</span></code>. In order to have this setting automatically when you open an Ubuntu terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;export DISPLAY=:0&quot;</span> &gt;&gt; ~/.bashrc
+</pre></div>
+</div>
+<p>In order to perform sanity checks of the NEURON GUI, from the Ubuntu terminal you can call:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>neurondemo
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="installing-source-distributions">
+<h1>Installing Source Distributions<a class="headerlink" href="#installing-source-distributions" title="Permalink to this headline"></a></h1>
+<p>If you are running NEURON in cluster/HPC environment where you would like to have better performance
+(e.g. using vendor compilers like Intel, Cray, AMD, NVIDIA etc.), we advise you to build the NEURON
+from source. Note that to use CoreNEURON with optimised CPU/GPU support, you have to install NEURON
+from source.</p>
+<div class="section" id="install-build-dependencies">
+<h2>Install Build Dependencies<a class="headerlink" href="#install-build-dependencies" title="Permalink to this headline"></a></h2>
+<p>In order to build NEURON from source, the following packages must be available:</p>
+<ul class="simple">
+<li>Bison</li>
+<li>Flex</li>
+<li>C/C++ compiler suite</li>
+<li>CMake 3.15.0</li>
+</ul>
+<p>The following packages are optional (see build options):</p>
+<ul class="simple">
+<li>Python &gt;=3.6 (for Python interface)</li>
+<li>Cython (for RXD)</li>
+<li>MPI (for parallel)</li>
+<li>X11 (Linux) or XQuartz (MacOS) (for GUI)</li>
+</ul>
+<p>Depending on platform you can install these dependencies as follows:</p>
+<p><a name="Mac-OS-Depend"></a></p>
+<div class="section" id="id1">
+<h3>Mac OS<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
+<p>This is for x86_64. For Apple M1 (arm64), see <a class="reference external" href="#Apple-M1-Build-Dependencies">here</a></p>
+<p>The easiest way to install dependencies on Mac OS is to use <a class="reference external" href="https://brew.sh/">brew</a> or
+<a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/index.html">conda</a> package manager. For example,
+once <a class="reference external" href="https://docs.brew.sh/Installation">brew is installed</a> you can do:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew install coreutils openmpi cmake
+brew install --cask xquartz
+</pre></div>
+</div>
+<p>Once these packages are installed, you can setup PATH as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/usr/local/bin/:<span class="nv">$PATH</span>
+</pre></div>
+</div>
+<p>If the desired python version is not installed, you can install it using
+<a class="reference external" href="https://www.python.org/downloads/mac-osx/">official distribution</a>. Also, note that
+<a class="reference external" href="https://stackoverflow.com/questions/9329243/how-to-install-xcode-command-line-tools">Xcode Command Line Tools</a>
+needs to be installed for development.</p>
+<p><a name="Apple-M1-Build-Dependencies"></a></p>
+<div class="section" id="apple-m1">
+<h4>Apple M1<a class="headerlink" href="#apple-m1" title="Permalink to this headline"></a></h4>
+<ul>
+<li><p class="first">Install command line tools as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xcode-select --install
+</pre></div>
+</div>
+</li>
+<li><p class="first">If desire classical NEURON GUI : from <a class="reference external" href="https://www.xquartz.org/">xquartz.org</a>, click “Releases”, click XQuartz-2.8.0_beta3 , and follow instructions. After installing, logout and log back in.</p>
+<p>If you desire single click button action for X11 when entering a window then execute below command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>defaults write org.xquartz.X11 wm_ffm -bool <span class="nb">true</span>
+</pre></div>
+</div>
+<p>For the new default to take effect, logout then log back in.</p>
+</li>
+<li><p class="first">Install dependencies with HomeBrew and pip as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># install brew and initialize shell</span>
+/bin/bash -c <span class="s2">&quot;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+<span class="nb">echo</span> <span class="s1">&#39;eval $(/opt/homebrew/bin/brew shellenv)&#39;</span> &gt;&gt; <span class="nv">$HOME</span>/.zprofile
+<span class="nb">eval</span> <span class="k">$(</span>/opt/homebrew/bin/brew shellenv<span class="k">)</span>
+
+brew install cmake
+brew install open-mpi
+
+pip3 install --user --upgrade pip
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/Library/Python/3.8/bin&quot;</span>:<span class="nv">$PATH</span>
+pip3 install --user cython
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Linux<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h3>
+<p>Depending on the platform (Ubuntu, CentOS, Fedora, Debian, Red Hat etc.), there are different ways to
+install dependencies. For example, on Ubuntu:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get update
+sudo apt-get install -y bison cmake flex git <span class="se">\</span>
+     libncurses-dev libopenmpi-dev libx11-dev <span class="se">\</span>
+     libxcomposite-dev openmpi-bin python3-dev
+<span class="c1"># for python dependencies</span>
+pip install scipy numpy cython
+</pre></div>
+</div>
+<p>We recommend using platform specific instructions provided in <a class="reference external" href="https://github.com/neuronsimulator/nrn-build-ci#scheduled-ci-builds-for-neuron">nrn-build-ci</a> repository.</p>
+<p><a name="build-cmake"></a></p>
+</div>
+</div>
+<div class="section" id="install-neuron-using-cmake">
+<h2>Install NEURON using CMake<a class="headerlink" href="#install-neuron-using-cmake" title="Permalink to this headline"></a></h2>
+<p>Starting with the 7.8.1 release, NEURON can be installed using the <a class="reference external" href="https://cmake.org/">CMake build system</a>.
+One of the primary advantages of a CMake-based build system is cross-platform support and integration with
+other projects like <a class="reference external" href="https://github.com/neuronsimulator/iv">Interviews</a>, <a class="reference external" href="https://github.com/BlueBrain/CoreNeuron/">CoreNEURON</a>,
+<a class="reference external" href="https://github.com/BlueBrain/nmodl/">NMODL</a> etc. These projects are now integrated into single a CMake-based
+build system, and they can be installed together as shown below:</p>
+<ol class="simple">
+<li>Clone the latest version or specific release:</li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">neuronsimulator</span><span class="o">/</span><span class="n">nrn</span>           <span class="c1"># latest development branch</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">neuronsimulator</span><span class="o">/</span><span class="n">nrn</span> <span class="o">-</span><span class="n">b</span> <span class="mf">8.0.0</span>  <span class="c1"># specific release version 8.0.0</span>
+<span class="n">cd</span> <span class="n">nrn</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li>Create a build directory:</li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">build</span>
+<span class="n">cd</span> <span class="n">build</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li>Run <code class="docutils literal notranslate"><span class="pre">cmake</span></code> with the appropriate options (see below for a list of common options). A full list of options
+can be found in <code class="docutils literal notranslate"><span class="pre">nrn/CMakeLists.txt</span></code> and defaults are shown in <code class="docutils literal notranslate"><span class="pre">nrn/cmake/BuildOptionDefaults.cmake</span></code>. e.g. a bare-bones installation:</li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cmake .. \
+ -DNRN_ENABLE_INTERVIEWS=OFF \
+ -DNRN_ENABLE_MPI=OFF \
+ -DNRN_ENABLE_RX3D=OFF \
+ -DPYTHON_EXECUTABLE=$(which python3) \
+ -DCMAKE_INSTALL_PREFIX=/path/to/install/directory
+</pre></div>
+</div>
+<ol class="simple">
+<li>Build the code:</li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="o">--</span><span class="n">build</span> <span class="o">.</span> <span class="o">--</span><span class="n">parallel</span> <span class="mi">8</span> <span class="o">--</span><span class="n">target</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>Feel free to set the number of parallel jobs (i.e. 8) according to your system using the <code class="docutils literal notranslate"><span class="pre">--parallel</span></code> option.</p>
+<ol class="simple">
+<li>Set PATH and PYTHONPATH environmental variables to use the installation:</li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export PATH=/path/to/install/directory/bin:$PATH
+export PYTHONPATH=/path/to/install/directory/lib/python:$PYTHONPATH
+</pre></div>
+</div>
+<p>Particularly useful CMake options are (use <strong>ON</strong> to enable and <strong>OFF</strong> to disable feature):</p>
+<ul class="simple">
+<li><strong>-DNRN_ENABLE_INTERVIEWS=OFF</strong> : Disable Interviews (native GUI support)</li>
+<li><strong>-DNRN_ENABLE_PYTHON=OFF</strong> : Disable Python support</li>
+<li><strong>-DNRN_ENABLE_MPI=OFF</strong> : Disable MPI support for parallelization</li>
+<li><strong>-DNRN_ENABLE_RX3D=OFF</strong> : Disable rx3d support</li>
+<li><strong>-DNRN_ENABLE_CORENEURON=ON</strong> : Enable CoreNEURON support</li>
+<li><strong>-DNRN_ENABLE_TESTS=ON</strong> : Enable unit tests</li>
+<li><strong>-DPYTHON_EXECUTABLE=/python/binary/path</strong> : Use provided Python binary to build Python interface</li>
+<li><strong>-DCMAKE_INSTALL_PREFIX=/install/dir/path</strong> : Location for installing</li>
+<li><strong>-DCORENRN_ENABLE_NMODL=ON</strong> : Use <a class="reference external" href="https://github.com/BlueBrain/nmodl/">NMODL</a> instead of <a class="reference external" href="https://github.com/BlueBrain/mod2c/">MOD2C</a> for code generation with CoreNEURON</li>
+</ul>
+<p>Please refer to <a class="reference external" href="docs/cmake_doc/options.rst">docs/cmake_doc/options.rst</a> for more information on
+the CMake options.</p>
+<div class="section" id="optimized-cpu-and-gpu-support-using-coreneuron">
+<h3>Optimized CPU and GPU Support using CoreNEURON<a class="headerlink" href="#optimized-cpu-and-gpu-support-using-coreneuron" title="Permalink to this headline"></a></h3>
+<p>NEURON now integrates <a class="reference external" href="https://github.com/BlueBrain/CoreNeuron/">CoreNEURON library</a> for improved simulation
+performance on modern CPU and GPU architectures. CoreNEURON is designed as a library within the NEURON simulator
+and can transparently handle all spiking network simulations including gap junction coupling with the fixed time
+step method. You can find detailed instructions <a class="reference external" href="docs/coreneuron/how-to/coreneuron">here</a> and
+<a class="reference external" href="https://github.com/BlueBrain/CoreNeuron/#installation">here</a>.</p>
+</div>
+<div class="section" id="run-integrated-tests">
+<h3>Run integrated tests<a class="headerlink" href="#run-integrated-tests" title="Permalink to this headline"></a></h3>
+<p><strong>NEURON</strong> includes also some unit and integration tests. To enable you need to set the <code class="docutils literal notranslate"><span class="pre">CMake</span></code> flag <strong>-DNRN_ENABLE_TESTS=ON</strong>.
+The tests lie in the <code class="docutils literal notranslate"><span class="pre">test</span></code> directory and cover various aspects of <strong>NEURON</strong>:</p>
+<ul class="simple">
+<li><strong>CoreNEURON</strong> integration (if enabled in build step)</li>
+<li>Functionality and result regression test for <a class="reference external" href="https://github.com/neuronsimulator/ringtest">ringtest</a> and <a class="reference external" href="https://github.com/neuronsimulator/testcorenrn">testcorenrn</a></li>
+<li>HOC interpreter tests</li>
+<li>Python interpreter tests</li>
+<li>Parallel Context tests</li>
+<li>Rx3d tests</li>
+<li>Unit tests</li>
+<li>GapJunction tests</li>
+</ul>
+<p>To run the tests it’s needed to:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> nrn/build
+cmake .. <span class="se">\</span>
+ -DNRN_ENABLE_INTERVIEWS<span class="o">=</span>OFF <span class="se">\</span>
+ -DNRN_ENABLE_MPI<span class="o">=</span>OFF <span class="se">\</span>
+ -DNRN_ENABLE_RX3D<span class="o">=</span>OFF <span class="se">\</span>
+ -DCMAKE_INSTALL_PREFIX<span class="o">=</span>/path/to/install/directory
+cmake --build . --parallel <span class="m">8</span>
+ctest <span class="c1"># use --parallel for speed, -R to run specific tests</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="faqs">
+<h2>FAQs<a class="headerlink" href="#faqs" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><strong>I am getting link errors “undefined reference to ‘tgoto, tgetent, tputs’”.</strong></li>
+</ul>
+<p>This is often an issue due to missing ncurses library linking. In this case, we recommend passing your ncurses installation via CMake.
+For example on Mac OS with a homebrew installation:
+<code class="docutils literal notranslate"><span class="pre">-DCMAKE_PREFIX_PATH=&quot;/usr/local/opt/ncurses&quot;</span></code> CMake option.</p>
+<ul class="simple">
+<li><strong>I installed NEURON via pip but while using MPI I get “could not dynamically load libmpi.so or libmpich.so”.</strong></li>
+</ul>
+<p>NEURON will try to find MPI library in the standard library paths (e.g. /usr/lib). But on some systems MPI
+libraries may not be in standard path. In that case you can try setting <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> (on linux) or <code class="docutils literal notranslate"><span class="pre">DYLD_LIBRARY_PATH</span></code> (on Mac OS):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/path/of/mpi/installation/lib:<span class="nv">$LD_LIBRARY_PATH</span>
+</pre></div>
+</div>
+<p>In some scenarios this may not be enough (e.g. with Anaconda installed MPI) in which case you can explicitly
+provide the path of MPI library using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">MPI_LIB_NRN_PATH</span><span class="o">=</span>/Applications/anaconda3/lib/libmpi.12.dylib
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong>Can I move installation directory?</strong></li>
+</ul>
+<p>As with any other UNIX package, it is not a good idea to move NEURON around once you’ve installed it,
+because the directory names are coded into the files themselves. If you need to move it, put a soft link
+in its original location that points to the new location (so the old filenames will still work).
+Better yet, simply recompile neuron specifying the new installation directory.</p>
+<ul class="simple">
+<li><strong>How can I compile my mod files?</strong><ul>
+<li>cd to the directory that contains your .mod files.</li>
+<li>type “/install/dir/bin/nrnivmodl” (or, if you have set install directory in your PATH env variable, just type “nrnivmodl”)</li>
+</ul>
+</li>
+</ul>
+<p>This will create a subdirectory of the current directory which is your CPU name (e.g. <code class="docutils literal notranslate"><span class="pre">x86_64</span></code>). Inside this
+directory is created the program “special”, which is the neuron binary that you want to run instead of nrniv.</p>
+<ul class="simple">
+<li><strong>NEURON fails to launch because shared libraries cannot be found.</strong></li>
+</ul>
+<p>Make sure to LD_LIBRARY_PATH or DYLD_LIBRARY_PATH environmental variables. For example, using bash shell:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/install/path/lib:<span class="nv">$LD_LIBRARY_PATH</span>. <span class="c1"># on linux</span>
+<span class="nb">export</span> <span class="nv">DYLD_LIBRARY_PATH</span><span class="o">=</span>/install/path/lib:<span class="nv">$DYLD_LIBRARY_PATH</span>. <span class="c1"># on Mac OS</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong>NEURON is not able to find correct Python or NEURON Python library. What can I do?</strong></li>
+</ul>
+<p>NEURON tries to find correct Python based on user’s environment. If you are using NEURON via python interpreter then,
+as mentioned previously, setting <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> would be sufficient. For <code class="docutils literal notranslate"><span class="pre">nrniv</span></code> or <code class="docutils literal notranslate"><span class="pre">special</span></code> binaries, you can also use
+<code class="docutils literal notranslate"><span class="pre">-pyexe</span></code> option to specify which Python should be used by NEURON:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nrniv -pyexe /python/install/path/python-3.8.3/bin/python3
+</pre></div>
+</div>
+<p>If you have enabled dynamic python support using <code class="docutils literal notranslate"><span class="pre">NRN_ENABLE_PYTHON_DYNAMIC</span></code> CMake option or installed NEURON via pip
+and see error like below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Could not load libnrnpython3
+</pre></div>
+</div>
+<p>then NEURON is not able to find appropriate Python and corresponding Python library. You can verify which Python is
+being used by running following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ nrnpyenv.sh
+...
+<span class="nb">export</span> <span class="nv">NRN_PYTHONHOME</span><span class="o">=</span><span class="s2">&quot;/python/install/path/python-3.8.3/&quot;</span>
+<span class="nb">export</span> <span class="nv">NRN_PYLIB</span><span class="o">=</span><span class="s2">&quot;/python/install/path/python-3.8.3/lib/libpython3.8.so.1.0&quot;</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">NRN_PYTHONHOME</span></code> and <code class="docutils literal notranslate"><span class="pre">NRN_PYLIB</span></code> are inappropriate then you can set them explicitly or use <code class="docutils literal notranslate"><span class="pre">-pyexe</span></code> option mentioned above.</p>
+<ul class="simple">
+<li><strong>How to build NEURON in cluster environment where build node architecture is different than compute node?</strong></li>
+</ul>
+<p>In cluster environment, sometime we have different architecture of login/build nodes than compute nodes (similar to
+cross-compile environment). NEURON has tools like <code class="docutils literal notranslate"><span class="pre">nocmodl</span></code>, <code class="docutils literal notranslate"><span class="pre">modlunit</span></code> which are executed on login/build
+nodes. If these tools are compiled with compute node architecture then we might see error like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span> <span class="m">10</span>%<span class="o">]</span> Generating ../../../src/nrnoc/syn.c
+Please verify that both the operating system and the processor support Intel<span class="o">(</span>R<span class="o">)</span> AVX512ER and AVX512PF instructions.
+</pre></div>
+</div>
+<p>or even <code class="docutils literal notranslate"><span class="pre">segmentation</span> <span class="pre">fault</span></code> when MOD files are translated to C files.</p>
+<p>To avoid this, we have to build nocmodl, modlunit with login/build node architecture. NEURON by default set <code class="docutils literal notranslate"><span class="pre">-O0</span></code> compile flag for these tools to avoid compiler generating architecture specific instructions. But if this is not sufficient, you can set <code class="docutils literal notranslate"><span class="pre">NRN_NMODL_CXX_FLAGS</span></code> CMake option specifying which compiler flags should be used. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake .. <span class="o">[</span>other options<span class="o">]</span> <span class="se">\</span>
+    -DCMAKE_CXX_FLAGS<span class="o">=</span><span class="s2">&quot;-O3 -xMIC-AVX512&quot;</span> <span class="se">\</span>
+    -DCMAKE_BUILD_TYPE<span class="o">=</span>Custom <span class="se">\</span>
+    -DNRN_NMODL_CXX_FLAGS<span class="o">=</span><span class="s2">&quot;-xHost&quot;</span>
+</pre></div>
+</div>
+<p>In the above example, we used custom build type with Intel compiler’s <code class="docutils literal notranslate"><span class="pre">-xMIC-AVX512</span></code> flag for KNL architecture but used <code class="docutils literal notranslate"><span class="pre">-xHost</span></code> flag so that <code class="docutils literal notranslate"><span class="pre">nocmodl</span></code> and <code class="docutils literal notranslate"><span class="pre">modlunit</span></code> are compiled compatible with host architecture (i.e. node where NEURON is being built).</p>
+<ul>
+<li><p class="first"><strong>I’m getting “unrecognized command-line option” build errors on macos as python extensions are
+being built.</strong></p>
+<p>Certain combinations of Python environment and C/C++ compiler on macos may lead to build errors of
+this kind:</p>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>running build_ext
+building &#39;neuron.rxd.geometry3d.graphicsPrimitives&#39; extension
+creating build
+creating build/temp.macosx-10.15-x86_64-2.7
+/usr/local/bin/gcc-10 -fno-strict-aliasing -fno-common -dynamic -g -Os -pipe -fno-common -fno-strict-aliasing -fwrapv -DENABLE_DTRACE -DMACOSX -DNDEBUG -Wall -Wstrict-prototypes -Wshorten-64-to-32 -iwithsysroot /usr/local/libressl/include -DNDEBUG -g -fwrapv -Os -Wall -Wstrict-prototypes -DENABLE_DTRACE -arch x86_64 -pipe -I/Users/user/nrn/share/lib/python/neuron/rxd/geometry3d -I. -I/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/numpy/core/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Python.framework/Versions/2.7/include/python2.7 -c graphicsPrimitives.cpp -o build/temp.macosx-10.15-x86_64-2.7/graphicsPrimitives.o -O0
+gcc-10: error: /usr/local/libressl/include: No such file or directory
+gcc-10: error: unrecognized command-line option &#39;-Wshorten-64-to-32&#39;
+gcc-10: error: unrecognized command-line option &#39;-iwithsysroot&#39;; did you mean &#39;-isysroot&#39;?
+error: command &#39;/usr/local/bin/gcc-10&#39; failed with exit status 1
+</pre></div>
+</div>
+<p>The reason for this type of failure is that Python will provide build command-arguments for
+extension building based on its own build. If the compiler used to build NEURON expects different
+commands (eg. gcc vs. clang) then above error will be encountered.</p>
+<p>A workaround for this issue is to set the <code class="docutils literal notranslate"><span class="pre">CFLAGS</span></code> environment variable providing build arguments
+compatible with your compiler. Here is an example for gcc/clang:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-fno-strict-aliasing -fno-common -dynamic -g -Os -pipe -DMACOSX -DNDEBUG -Wall -Wstrict-prototypes&quot;</span>
+</pre></div>
+</div>
+<p>If you see any other issues, please open <a class="reference external" href="https://github.com/neuronsimulator/nrn/issues/new/choose">an issue here</a>.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../cmake_doc/index.html" class="btn btn-neutral float-right" title="CMake Build Options" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Duke, Yale and the Blue Brain Project.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

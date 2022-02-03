@@ -1,0 +1,6 @@
+Reaction-Diffusion tutorial
+----------------
+
+.. raw:: html
+   :file: Reaction-Diffusion tutorial.html
+

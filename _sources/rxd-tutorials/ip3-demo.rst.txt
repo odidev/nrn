@@ -1,0 +1,6 @@
+ip3-demo
+----------------
+
+.. raw:: html
+   :file: ip3-demo.html
+
